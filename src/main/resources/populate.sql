@@ -1,0 +1,15 @@
+insert into contact (first_name,last_name,birth_date) values ('John','Smith','1981-02-15');
+insert into contact (first_name,last_name,birth_date) values ('Mary','Kay','1986-04-25');
+insert into contact (first_name,last_name,birth_date) values ('John','Lenon','1951-01-05');
+insert into contact (first_name,last_name,birth_date) values ('Joe','Malkovich','1976-12-12');
+insert into hobby (hobby_id,hobby_descr) values ('Programming','Like programming');
+insert into hobby (hobby_id,hobby_descr) values ('Swimming','Like swimming');
+insert into hobby (hobby_id,hobby_descr) values ('Chess','Like to play chess');
+insert into hobby (hobby_id,hobby_descr) values ('Photo','Like to make photo');
+insert into hobby (hobby_id,hobby_descr) values ('Football','Like to play and watching football');
+insert into contact_friendship (cintact_id, contact_id) values (1,3);
+insert into contact_friendship (cintact_id, contact_id) values (1,4);
+insert into contact_friendship (cintact_id, contact_id) values (2,1);
+insert into contact_friendship (cintact_id, contact_id) values (2,3);
+insert into contact_friendship (cintact_id, contact_id) values (3,4);
+insert into contact_friendship (cintact_id, contact_id) values (4,2);
