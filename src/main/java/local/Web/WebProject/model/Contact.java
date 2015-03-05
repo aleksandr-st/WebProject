@@ -18,8 +18,9 @@ public class Contact implements Serializable{
 	private String firstName;
 	private String lastName;
 	private DateTime birthDate;
-	private TreeSet<Hobby> hobbies;
-	private TreeSet<Place> places;
+	private Set<Hobby> hobbies;
+	private Set<Place> places;
+	private Set<Contact> friends;
 	
 	public Contact(){
 		
@@ -60,8 +61,8 @@ public class Contact implements Serializable{
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+	@Type(type="org.joda.time.contrib.hibernate.PersistentDateTime")
 	@Column(name="BIRTH_DATE")
-	@Type(type="org.joda.time.contrib.hibernate.PersistenDateTime")
 	public DateTime getBirthDate() {
 		return this.birthDate;
 	}
@@ -73,10 +74,10 @@ public class Contact implements Serializable{
 		joinColumns=@JoinColumn(name="CONTACT_ID"),
 		inverseJoinColumns=@JoinColumn(name="HOBBY_ID")
 		)
-	public TreeSet<Hobby> getHobbies() {
+	public Set<Hobby> getHobbies() {
 		return this.hobbies;
 	}
-	public void setHobbies(TreeSet<Hobby> hobbies) {
+	public void setHobbies(Set<Hobby> hobbies) {
 		this.hobbies = hobbies;
 	}
 	@ManyToMany
@@ -84,11 +85,22 @@ public class Contact implements Serializable{
 		joinColumns=@JoinColumn(name="CONTACT_ID"),
 		inverseJoinColumns=@JoinColumn(name="PLACE_ID")
 		)
-	public TreeSet<Place> getPlaces() {
+	public Set<Place> getPlaces() {
 		return this.places;
 	}
-	public void setPlaces(TreeSet<Place> places) {
+	public void setPlaces(Set<Place> places) {
 		this.places = places;
+	}
+	@ManyToMany
+	@JoinTable(name="contact_friendship",
+		joinColumns=@JoinColumn(name="CONTACT_ID"),
+		inverseJoinColumns=@JoinColumn(name="FRIEND_ID")
+		)
+	public Set<Contact> getFriends() {
+		return friends;
+	}
+	public void setFriends(Set<Contact> friends) {
+		this.friends = friends;
 	}
 	public String toString(){
 		String str = ""; //super();

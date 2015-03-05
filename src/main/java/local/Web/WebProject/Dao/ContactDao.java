@@ -1,4 +1,4 @@
-package local.Web.WebProject.Dao;
+package local.Web.WebProject.dao;
 
 import local.Web.WebProject.model.Contact;
 

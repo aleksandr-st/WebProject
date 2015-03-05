@@ -1,7 +1,8 @@
-package local.Web.WebProject.Dao;
+package local.Web.WebProject.dao.hibernate;
 
 import java.util.*;
 
+import local.Web.WebProject.dao.PlaceDao;
 import local.Web.WebProject.model.Contact;
 import local.Web.WebProject.model.Place;
 

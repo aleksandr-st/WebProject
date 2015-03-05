@@ -6,6 +6,10 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="hobby")
+@NamedQueries({
+	@NamedQuery(name="Hobby.findAllWithHobby",
+		query="select distinct c from Contact c join fetch c.hobbies h where h.title = :hobbyId"),
+})
 public class Hobby {
 	private String title;
 	private String description;

@@ -1,4 +1,4 @@
-package local.Web.WebProject.Dao;
+package local.Web.WebProject.dao;
 
 import java.util.List;
 
