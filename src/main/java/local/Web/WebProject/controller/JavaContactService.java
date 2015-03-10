@@ -5,8 +5,8 @@ import java.util.*;
 import javax.annotation.Resource;
 
 import org.joda.time.DateTime;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.GenericXmlApplicationContext;
+import org.springframework.stereotype.Service;
 
 import local.Web.WebProject.dao.ContactDao;
 import local.Web.WebProject.dao.HobbyDao;
@@ -16,29 +16,23 @@ import local.Web.WebProject.model.Hobby;
 import local.Web.WebProject.model.Message;
 import local.Web.WebProject.model.Place;
 
+@Service("contactService")
 public class JavaContactService {
+	@Resource(name="contactDao")
 	private ContactDao contactDao;
+	@Resource(name="hobbyDao")
 	private HobbyDao hobbyDao;
+	@Resource(name="placeDao")
 	private PlaceDao placeDao;
 	
-	public ContactDao getContactDao() {
-		return this.contactDao;
+	public JavaContactService(){
 	}
-	@Resource(name="contactDao")
 	public void setContactDao(ContactDao contactDao) {
 		this.contactDao = contactDao;
 	}
-	public HobbyDao getHobbyDao() {
-		return this.hobbyDao;
-	}
-	@Resource(name="hobbyDao")
 	public void setHobbyDao(HobbyDao hobbyDao) {
 		this.hobbyDao = hobbyDao;
 	}
-	public PlaceDao getPlaceDao() {
-		return this.placeDao;
-	}
-	@Resource(name="placeDao")
 	public void setPlaceDao(PlaceDao placeDao) {
 		this.placeDao = placeDao;
 	}

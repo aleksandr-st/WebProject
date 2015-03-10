@@ -3,13 +3,14 @@ package local.Web.WebProject.dao.hibernate;
 import javax.annotation.Resource;
 
 import org.hibernate.SessionFactory;
-import org.springframework.stereotype.Repository;
+
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import local.Web.WebProject.dao.ContactDao;
 import local.Web.WebProject.model.Contact;
 
-@Repository("contactDao")
+@Service("contactDao")
 @Transactional
 public class ContactDaoImpl implements ContactDao{
 	private SessionFactory sessionFactory;

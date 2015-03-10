@@ -23,7 +23,6 @@ public class Contact implements Serializable{
 	private Set<Contact> friends;
 	
 	public Contact(){
-		
 	}
 	public Contact(String firstName, String lastName, DateTime birthDate){
 		this.firstName = firstName;

@@ -7,13 +7,14 @@ import javax.persistence.*;
 
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import local.Web.WebProject.dao.HobbyDao;
 import local.Web.WebProject.model.Contact;
 import local.Web.WebProject.model.Hobby;
 
-@Repository("hobbyDao")
+@Service("hobbyDao")
 @Transactional
 public class HobbyDaoImpl implements HobbyDao{
 	private SessionFactory sessionFactory;

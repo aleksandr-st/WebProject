@@ -1,7 +1,5 @@
 package local.Web.WebProject.model;
 
-import static javax.persistence.GenerationType.IDENTITY;
-
 import java.util.Set;
 
 import javax.persistence.*;
