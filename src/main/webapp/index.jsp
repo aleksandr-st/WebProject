@@ -10,9 +10,10 @@ pageEncoding="ISO-8859-1"%>
 <body>
  
 	<center>
-		<h2>Hello World</h2>
+		<h2>Wellcome!</h2>
 		<h3>
 			<a href="hello?name=Eric">Click Here</a>
+			<a href="showall">Click Here for list of contacts</a>
 		</h3>
 	</center>
 </body>

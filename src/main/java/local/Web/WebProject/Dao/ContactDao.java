@@ -1,9 +1,13 @@
 package local.Web.WebProject.dao;
 
+import java.util.List;
+
 import local.Web.WebProject.model.Contact;
 
 public interface ContactDao {
 
+	public List<Contact> findAll();
+	
 	public void addContact(Contact contact);
 	
 	public void deleteContact(Contact contact);

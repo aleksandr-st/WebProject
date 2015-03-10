@@ -1,9 +1,10 @@
 package local.Web.WebProject.dao.hibernate;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.hibernate.SessionFactory;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,6 +36,10 @@ public class ContactDaoImpl implements ContactDao{
 	}
 	public void removeFriendship(Contact contact1, Contact contact2){
 		
+	}
+	@Transactional(readOnly=true)
+	public List<Contact> findAll() {
+		return sessionFactory.getCurrentSession().createQuery("from Contact c").list();
 	}
 
 }

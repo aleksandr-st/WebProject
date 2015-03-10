@@ -6,7 +6,9 @@ import javax.annotation.Resource;
 
 import org.joda.time.DateTime;
 import org.springframework.context.support.GenericXmlApplicationContext;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import local.Web.WebProject.dao.ContactDao;
 import local.Web.WebProject.dao.HobbyDao;
@@ -16,7 +18,7 @@ import local.Web.WebProject.model.Hobby;
 import local.Web.WebProject.model.Message;
 import local.Web.WebProject.model.Place;
 
-@Service("contactService")
+@Controller
 public class JavaContactService {
 	@Resource(name="contactDao")
 	private ContactDao contactDao;
@@ -61,6 +63,21 @@ public class JavaContactService {
 		return messageList;
 	}
 
+	@RequestMapping("/showall")
+	public ModelAndView showMessage() {
+		System.out.println("in controller");
+		
+		List<Contact> contacts = contactDao.findAll();
+		for(Contact contact: contacts){
+			System.out.println(contact);
+		}
+				
+		ModelAndView mv = new ModelAndView("list");
+		mv.addObject("contacts", contacts);
+		mv.addObject("contact1", contacts.get(1));
+		return mv;
+	}
+
 	public static void main(String[] args) {
 		GenericXmlApplicationContext ctx = new GenericXmlApplicationContext();
 		ctx.load("classpath:data-source.xml");
@@ -70,6 +87,11 @@ public class JavaContactService {
 		contactService.setContactDao(ctx.getBean("contactDao", ContactDao.class));
 		DateTime dateTime = new DateTime(2000,2,10,0,0);
 		contactService.createContact("Alex", "Gameson", dateTime);
-	}
+
+		List<Contact> contacts = contactService.contactDao.findAll();
+		for(Contact contact: contacts){
+			System.out.println(contact);
+		}
+}
 
 }
