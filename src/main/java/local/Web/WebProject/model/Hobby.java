@@ -47,6 +47,7 @@ public class Hobby {
 	public void setContacts(Set<Contact> contacts) {
 		this.contacts = contacts;
 	}
+	@Override
 	public String toString(){
 		return "Hobby Id: " + title + ", Description: " + description;
 	}

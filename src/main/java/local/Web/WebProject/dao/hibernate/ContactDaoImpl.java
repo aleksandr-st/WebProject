@@ -5,13 +5,13 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.hibernate.SessionFactory;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import local.Web.WebProject.dao.ContactDao;
 import local.Web.WebProject.model.Contact;
 
-@Service("contactDao")
+@Repository("contactDao")
 @Transactional
 public class ContactDaoImpl implements ContactDao{
 	private SessionFactory sessionFactory;
@@ -40,6 +40,10 @@ public class ContactDaoImpl implements ContactDao{
 	@Transactional(readOnly=true)
 	public List<Contact> findAll() {
 		return sessionFactory.getCurrentSession().createQuery("from Contact c").list();
+	}
+	@Transactional(readOnly=true)
+	public Contact findById(Long id) {
+		return (Contact)sessionFactory.getCurrentSession().getNamedQuery("Contact.findById").setParameter("id", id) .uniqueResult();
 	}
 
 }

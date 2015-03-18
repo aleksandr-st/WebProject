@@ -5,15 +5,14 @@ pageEncoding="ISO-8859-1"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Spring 4 MVC - HelloWorld Index Page</title>
+<title>Spring 4 MVC - WebProject Index Page</title>
 </head>
 <body>
  
 	<center>
 		<h2>Wellcome!</h2>
 		<h3>
-			<a href="hello?name=Eric">Click Here</a>
-			<a href="showall">Click Here for list of contacts</a>
+			<a href="contacts">Click Here for list of contacts</a>
 		</h3>
 	</center>
 </body>

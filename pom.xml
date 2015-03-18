@@ -79,12 +79,47 @@
 	<dependency>
 		<groupId>joda-time</groupId>
 		<artifactId>joda-time-hibernate</artifactId>
-		<version>1.3</version>
+		<version>${joda-hibernate.version}</version>
 	</dependency>
 	<dependency>
 		<groupId>com.h2database</groupId>
 		<artifactId>h2</artifactId>
 		<version>${h2.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>javax.servlet.jsp.jstl</groupId>
+		<artifactId>jstl-api</artifactId>
+		<version>${jstl.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>javax.servlet.jsp</groupId>
+		<artifactId>jsp-api</artifactId>
+		<version>${jsp-api.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>javax.servlet</groupId>
+		<artifactId>servlet-api</artifactId>
+		<version>${servlet-api.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>org.glassfish.web</groupId>
+		<artifactId>jstl-impl</artifactId>
+		<version>${jstl.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>joda-time</groupId>
+		<artifactId>joda-time-jsptags</artifactId>
+		<version>${joda-jsptags.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>org.apache.tiles</groupId>
+		<artifactId>tiles-core</artifactId>
+		<version>${tiles.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>org.apache.tiles</groupId>
+		<artifactId>tiles-jsp</artifactId>
+		<version>${tiles.version}</version>
 	</dependency>
   </dependencies>
   <build>
@@ -97,5 +132,11 @@
 	<hsqldb.version>2.3.2</hsqldb.version>
 	<h2.version>1.4.185</h2.version>
 	<joda.version>2.4</joda.version>
+	<tiles.version>2.2.2</tiles.version>
+	<joda-hibernate.version>1.3</joda-hibernate.version>
+	<joda-jsptags.version>1.1.1</joda-jsptags.version>
+	<jstl.version>1.2</jstl.version>
+	<jsp-api.version>2.1</jsp-api.version>
+	<servlet-api.version>2.5</servlet-api.version>
   </properties>
 </project>

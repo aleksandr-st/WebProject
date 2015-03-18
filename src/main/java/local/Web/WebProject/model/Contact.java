@@ -12,6 +12,10 @@ import org.joda.time.DateTime;
 
 @Entity
 @Table(name="contact")
+@NamedQueries({
+	@NamedQuery(name="Contact.findById",
+			query="select distinct c from Contact c left join fetch c.hobbies h left join fetch c.places p left join fetch c.friends f where c.id = :id")
+})
 public class Contact implements Serializable{
 	private Long id;
 	private int version;
@@ -101,8 +105,8 @@ public class Contact implements Serializable{
 	public void setFriends(Set<Contact> friends) {
 		this.friends = friends;
 	}
+	@Override
 	public String toString(){
-		String str = ""; //super();
-		return str + "\n" + firstName + "\n" + lastName + "\n" + birthDate;
+		return firstName + "\n" + lastName + "\n" + birthDate;
 	}
 }

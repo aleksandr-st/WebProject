@@ -8,6 +8,8 @@ public interface ContactDao {
 
 	public List<Contact> findAll();
 	
+	public Contact findById(Long id);
+	
 	public void addContact(Contact contact);
 	
 	public void deleteContact(Contact contact);

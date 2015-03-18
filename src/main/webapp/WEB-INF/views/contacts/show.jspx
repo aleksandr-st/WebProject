@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:joda="http://www.joda.org/joda/time/tags"
+	version="2.0">
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+
+	<spring:message code="label_contact_list" var="labelContactList"/>
+	<spring:message code="label_contact_first_name" var="labelContactFirstName"/>
+	<spring:message code="label_contact_last_name" var="labelContactLastName"/>
+	<spring:message code="label_contact_birth_date" var="labelContactBirthDate"/>
+	<spring:message code="date_format_pattern" var="dateFormatPattern"/>
+	<spring:message code="label_contact_hobbies" var="labelContactHobbies"/>
+	<spring:message code="label_contact_places" var="labelContactPlaces"/>
+	<spring:message code="label_contact_friends" var="labelContactFriends"/>
+	<spring:url value="/contacts" var="editContactUrl" />
+
+	<h1>${labelContactList}</h1>
+	<div id="contactInfo">
+		<c:if test="${not empty message}">
+			<div id="message" class="${message.type}">${message.message}</div>
+		</c:if>
+		<table>
+			<tr>
+				<td>${labelContactFirstName}</td>
+				<td>${contact.firstName}</td>
+			</tr>
+			<tr>
+				<td>${labelContactLastName}</td>
+				<td>${contact.lastName}</td>
+			</tr>
+			<tr>
+				<td>${labelContactBirthDate}</td>
+				<td><joda:format value="${contact.birthDate}"
+						pattern="${dateFormatPattern}" /></td>
+			</tr>
+			<c:if test="${not empty contact.hobbies}">
+				<tr>
+					<td rowspan="${contact.hobbies.size()+1}">Hobbies:</td>
+				</tr>
+				<c:forEach var="hobby" items="${contact.hobbies}">
+					<tr>
+						<td>${hobby.title}</td>
+					</tr>
+				</c:forEach>
+			</c:if>
+			<c:if test="${not empty contact.places}">
+				<tr>
+					<td rowspan="${contact.places.size()+1}">Places:</td>
+				</tr>
+				<c:forEach var="place" items="${contact.places}">
+					<tr>
+						<td>${place.title}</td>
+					</tr>
+				</c:forEach>
+			</c:if>
+			<c:if test="${not empty contact.friends}">
+				<tr>
+					<td rowspan="${contact.friends.size()+1}">Friends:</td>
+				</tr>
+				<c:forEach var="friend" items="${contact.friends}">
+					<tr>
+						<td>${friend.firstName} ${friend.lastName}</td>
+					</tr>
+				</c:forEach>
+			</c:if>
+		</table>
+		<a href="${editContactUrl}/${contact.id}?form">Update contact</a>
+	</div>
+</div>

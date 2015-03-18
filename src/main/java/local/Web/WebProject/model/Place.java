@@ -22,7 +22,7 @@ public class Place {
 		this.latitude = latitude;
 	}
 	@Id
-	@Column(name="TITLE")
+	@Column(name="PLACE_ID")
 	public String getTitle() {
 		return this.title;
 	}
@@ -61,6 +61,7 @@ public class Place {
 	public void setContacts(Set<Contact> contacts) {
 		this.contacts = contacts;
 	}
+	@Override
 	public String toString(){
 		return "Place Id: " + title + ", Description: " + description;
 	}
