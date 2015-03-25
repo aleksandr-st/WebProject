@@ -87,8 +87,9 @@ public class JavaContactService implements ContactService{
 		return contactDao.findAll();
 	}
 	@Override
-	public void addOrUpdate(Contact contact) {
+	public Contact addOrUpdate(Contact contact) {
 		contactDao.addContact(contact);
+		return contact;
 	}
 
 }

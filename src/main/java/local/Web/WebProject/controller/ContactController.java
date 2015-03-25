@@ -36,7 +36,7 @@ public class ContactController {
 	private ContactService contactService;
 
 	@RequestMapping(method = RequestMethod.GET)
-	public String showMessage(Model uiModel) {
+	public String showList(Model uiModel) {
 		System.out.println("in controller");
 		
 		List<Contact> contacts = contactService.findAll();

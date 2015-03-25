@@ -26,6 +26,6 @@ public interface ContactService {
 	
 	List<Contact> findAll();
 	
-	void addOrUpdate(Contact contact);
+	Contact addOrUpdate(Contact contact);
 
 }

@@ -8,6 +8,16 @@
   <name>WebProject Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <dependencies>
+	<dependency>
+	  <groupId>org.mockito</groupId>
+	  <artifactId>mockito-core</artifactId>
+	  <version>1.10.19</version>
+	</dependency>
+    <dependency>
+    	<groupId>org.springframework</groupId>
+    	<artifactId>spring-test</artifactId>
+    	<version>${spring.version}</version>
+    </dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
@@ -65,7 +75,11 @@
 		<artifactId>hibernate-validator</artifactId>
 		<version>${hibernate-validator.version}</version>
 	</dependency>
-		
+	<dependency>
+		<groupId>org.slf4j</groupId>
+		<artifactId>slf4j-simple</artifactId>
+		<version>1.7.10</version>
+	</dependency>	
 	<dependency>
 		<groupId>org.hibernate</groupId>
 		<artifactId>hibernate-ehcache</artifactId>
