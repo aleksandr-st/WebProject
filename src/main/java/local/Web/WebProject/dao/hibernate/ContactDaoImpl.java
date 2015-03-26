@@ -23,8 +23,9 @@ public class ContactDaoImpl implements ContactDao{
 	public void setSessionFactory(SessionFactory sessionFactory){
 		this.sessionFactory = sessionFactory;
 	}
-	public void addContact(Contact contact){
+	public Contact addContact(Contact contact){
 		sessionFactory.getCurrentSession().saveOrUpdate(contact);
+		return contact;
 	}
 	public void deleteContact(Contact contact){
 		sessionFactory.getCurrentSession().delete(contact);

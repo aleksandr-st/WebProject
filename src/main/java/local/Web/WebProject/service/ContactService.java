@@ -4,17 +4,19 @@ import java.util.List;
 import java.util.Set;
 
 import local.Web.WebProject.model.Contact;
+import local.Web.WebProject.model.Hobby;
 import local.Web.WebProject.model.Message;
+import local.Web.WebProject.model.Place;
 
 import org.joda.time.DateTime;
 
 public interface ContactService {
 	
-	void createContact(String firstName, String lastName, DateTime birthDate);
+	Contact createContact(String firstName, String lastName, DateTime birthDate);
 	
-	void addHobby(String title, String description);
+	Hobby addHobby(String title, String description);
 	
-	void addPlace(String title, String description, Double longitude, Double latitude);
+	Place addPlace(String title, String description, Double longitude, Double latitude);
 	
 	void addFriendship(Contact contact, Contact contactFriend);
 	

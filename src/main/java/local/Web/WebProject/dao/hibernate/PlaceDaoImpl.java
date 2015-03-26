@@ -10,8 +10,8 @@ import local.Web.WebProject.model.Place;
 @Repository("placeDao")
 public class PlaceDaoImpl implements PlaceDao{
 	
-	public void addPlace(Place place){
-		
+	public Place addPlace(Place place){
+		return null;
 	}
 	public List<Contact> getAllContactsForPlace(Place place){
 		List<Contact> contactSet = null;

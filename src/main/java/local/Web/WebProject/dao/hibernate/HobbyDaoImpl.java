@@ -24,8 +24,9 @@ public class HobbyDaoImpl implements HobbyDao{
 		this.sessionFactory = sessionFactory;
 	}
 	
-	public void addHobby(Hobby hobby){
+	public Hobby addHobby(Hobby hobby){
 		sessionFactory.getCurrentSession().saveOrUpdate(hobby);
+		return hobby;
 	}
 	@Transactional(readOnly=true)
 	public List<Contact> getAllContactsWithHobby(Hobby hobby){

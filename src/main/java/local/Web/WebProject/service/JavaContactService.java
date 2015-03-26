@@ -35,16 +35,15 @@ public class JavaContactService implements ContactService{
 	public void setPlaceDao(PlaceDao placeDao) {
 		this.placeDao = placeDao;
 	}
-	public void createContact(String firstName, String lastName, DateTime birthDate){
+	public Contact createContact(String firstName, String lastName, DateTime birthDate){
 		Contact newContact = new Contact(firstName, lastName, birthDate);
-		contactDao.addContact(newContact);
-		System.out.println(newContact.toString());
+		return contactDao.addContact(newContact);
 	}
-	public void addHobby(String title, String description){
-		hobbyDao.addHobby(new Hobby(title, description));
+	public Hobby addHobby(String title, String description){
+		return hobbyDao.addHobby(new Hobby(title, description));
 	}
-	public void addPlace(String title, String description, Double longitude, Double latitude){
-		placeDao.addPlace(new Place(title, description, longitude, latitude));
+	public Place addPlace(String title, String description, Double longitude, Double latitude){
+		return placeDao.addPlace(new Place(title, description, longitude, latitude));
 	}
 	public void addFriendship(Contact contact, Contact contactFriend){
 		contactDao.addFriendship(contact, contactFriend);

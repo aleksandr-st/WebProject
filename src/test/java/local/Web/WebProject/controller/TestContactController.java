@@ -60,6 +60,7 @@ public class TestContactController {
 		String result = contactController.showList(uiModel);
 		assertNotNull(result);
 		assertEquals("contacts/list", result);
+		@SuppressWarnings("unchecked")
 		List<Contact> modelContacts = (List<Contact>) uiModel.get("contacts");
 		assertEquals(1, modelContacts.size());
 	}

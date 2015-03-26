@@ -10,7 +10,7 @@ public interface ContactDao {
 	
 	public Contact findById(Long id);
 	
-	public void addContact(Contact contact);
+	public Contact addContact(Contact contact);
 	
 	public void deleteContact(Contact contact);
 	
