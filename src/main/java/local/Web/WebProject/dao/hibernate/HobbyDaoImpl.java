@@ -28,9 +28,22 @@ public class HobbyDaoImpl implements HobbyDao{
 		sessionFactory.getCurrentSession().saveOrUpdate(hobby);
 		return hobby;
 	}
+	public void removeHobby(Hobby hobby){
+		sessionFactory.getCurrentSession().delete(hobby);
+	}
 	@Transactional(readOnly=true)
 	public List<Contact> getAllContactsWithHobby(Hobby hobby){
 		return sessionFactory.getCurrentSession().getNamedQuery("Hobby.findAllWithHoby").setParameter("hobbyId", hobby).list();
+	}
+	@Transactional(readOnly=true)
+	public Hobby findById(String id){
+//		System.out.println("1");
+		return (Hobby)sessionFactory.getCurrentSession().getNamedQuery("Hobby.findById").setParameter("id", id).uniqueResult();
+	}
+	@Transactional(readOnly=true)
+	public List<Hobby> findAll(){
+//		System.out.println("2");
+		return sessionFactory.getCurrentSession().createQuery("from Hobby h").list();
 	}
 
 }

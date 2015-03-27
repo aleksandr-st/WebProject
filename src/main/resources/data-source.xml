@@ -42,5 +42,6 @@
 	</bean>
 	
 	<context:annotation-config />
+	<context:component-scan base-package="local.Web.WebProject.dao" />
 
 </beans>

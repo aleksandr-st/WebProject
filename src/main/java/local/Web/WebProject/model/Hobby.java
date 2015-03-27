@@ -7,12 +7,22 @@ import javax.persistence.*;
 @Entity
 @Table(name="hobby")
 @NamedQueries({
+	@NamedQuery(name="Hobby.findById",
+		query="select h from Hobby h where h.title = :id"),
 	@NamedQuery(name="Hobby.findAllWithHobby",
 		query="select distinct c from Contact c join fetch c.hobbies h where h.title = :hobbyId"),
 })
 public class Hobby {
+	@Id
+	@Column(name="HOBBY_ID")
 	private String title;
+	@Column(name="HOBBY_DESCR")
 	private String description;
+	@ManyToMany
+	@JoinTable(name="contact_hobby",
+		joinColumns=@JoinColumn(name="HOBBY_ID"),
+		inverseJoinColumns=@JoinColumn(name="CONTACT_ID")
+		)
 	private Set<Contact> contacts;
 	
 	public Hobby(){		
@@ -21,26 +31,18 @@ public class Hobby {
 		this.title = title;
 		this.description = description;
 	}
-	@Id
-	@Column(name="HOBBY_ID")
 	public String getTitle() {
 		return this.title;
 	}
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	@Column(name="HOBBY_DESCR")
 	public String getDescription() {
 		return this.description;
 	}
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	@ManyToMany
-	@JoinTable(name="contact_hobby",
-		joinColumns=@JoinColumn(name="HOBBY_ID"),
-		inverseJoinColumns=@JoinColumn(name="CONTACT_ID")
-		)
 	public Set<Contact> getContacts() {
 		return this.contacts;
 	}

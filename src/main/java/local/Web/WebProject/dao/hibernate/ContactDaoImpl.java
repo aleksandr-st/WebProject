@@ -1,6 +1,7 @@
 package local.Web.WebProject.dao.hibernate;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.Resource;
 
@@ -30,13 +31,19 @@ public class ContactDaoImpl implements ContactDao{
 	public void deleteContact(Contact contact){
 		sessionFactory.getCurrentSession().delete(contact);
 	}
-	public void addFriendship(Contact contact1, Contact contact2){
-		//Думаю надо найти по Ид основной контакт и удалить из его друзей
-		//указанный контакт(найдя его тоже по Ид, чтобы точно найти в сете)
-		//и затем обновить первоначальный путем сохранения
+	public Contact addFriendship(Contact contact1, Contact contact2){
+		Set<Contact> friends = contact1.getFriends();
+		friends.add(contact2);
+		contact1.setFriends(friends);
+		sessionFactory.getCurrentSession().saveOrUpdate(contact1);
+		return contact1;
 	}
-	public void removeFriendship(Contact contact1, Contact contact2){
-		
+	public Contact removeFriendship(Contact contact1, Contact contact2){
+		Set<Contact> friends = contact1.getFriends();
+		friends.remove(contact2);
+		contact1.setFriends(friends);
+		sessionFactory.getCurrentSession().saveOrUpdate(contact1);
+		return contact1;
 	}
 	@Transactional(readOnly=true)
 	public List<Contact> findAll() {
@@ -44,7 +51,7 @@ public class ContactDaoImpl implements ContactDao{
 	}
 	@Transactional(readOnly=true)
 	public Contact findById(Long id) {
-		return (Contact)sessionFactory.getCurrentSession().getNamedQuery("Contact.findById").setParameter("id", id) .uniqueResult();
+		return (Contact)sessionFactory.getCurrentSession().getNamedQuery("Contact.findById").setParameter("id", id).uniqueResult();
 	}
 
 }

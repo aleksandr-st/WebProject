@@ -14,8 +14,8 @@ public interface ContactDao {
 	
 	public void deleteContact(Contact contact);
 	
-	public void addFriendship(Contact contact1, Contact contact2);
+	public Contact addFriendship(Contact contact1, Contact contact2);
 	
-	public void removeFriendship(Contact contact1, Contact contact2);
+	public Contact removeFriendship(Contact contact1, Contact contact2);
 	
 }

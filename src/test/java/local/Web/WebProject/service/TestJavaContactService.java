@@ -1,9 +1,8 @@
 package local.Web.WebProject.service;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
+import static org.mockito.Matchers.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +27,7 @@ public class TestJavaContactService {
 	private ContactDao contactDao;
 	private HobbyDao hobbyDao;
 	private PlaceDao placeDao;
-	private ContactService contactService;
+	private JavaContactService contactService;
 	
 	
 	@BeforeClass
@@ -46,8 +45,11 @@ public class TestJavaContactService {
 		placeDao = mock(PlaceDao.class);
 		contactService = new JavaContactService();
 		ReflectionTestUtils.setField(contactService, "contactDao", contactDao);
+		contactService.setContactDao(contactService.getContactDao());
 		ReflectionTestUtils.setField(contactService, "hobbyDao", hobbyDao);
+		contactService.setHobbyDao(contactService.getHobbyDao());
 		ReflectionTestUtils.setField(contactService, "placeDao", placeDao);
+		contactService.setPlaceDao(contactService.getPlaceDao());
 	}
 
 	@After
@@ -59,11 +61,15 @@ public class TestJavaContactService {
 		String firstName = "Kim";
 		String lastName = "Chen";
 		DateTime birthDate = new DateTime(1980,5,4,0,0);
-		final Contact contact = new Contact(firstName, lastName, birthDate);
-		when(contactDao.addContact(contact)).thenReturn(contact);
+		final Contact testContact = new Contact(firstName, lastName, birthDate);
+		when(contactDao.addContact((Contact)anyObject())).thenReturn(testContact);
 		Contact newContact = new Contact();
 		newContact = contactService.createContact(firstName, lastName, birthDate);
-		verify(contactDao).addContact(newContact);
+		assertNotNull(newContact);
+		verify(contactDao, times(1)).addContact((Contact)anyObject());
+		assertEquals(testContact.getFirstName(), newContact.getFirstName());
+		assertEquals(testContact.getLastName(), newContact.getLastName());
+		assertEquals(testContact.getBirthDate(), newContact.getBirthDate());
 	}
 
 	@Test
