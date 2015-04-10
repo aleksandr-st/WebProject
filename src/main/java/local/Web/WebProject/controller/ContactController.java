@@ -70,15 +70,13 @@ public class ContactController {
 		redirectAttributes.addFlashAttribute("message", new MessageMS("success", messageSource.getMessage("contact_save_success", 
 				new Object[] {}, locale)));
 		Contact contactForUpdate;
-		if (contact.getId() == null) {
-			contactForUpdate = contact;
-		} else {
-			contactForUpdate = contactService.findById(contact.getId());
-			contactForUpdate.setFirstName(contact.getFirstName());
-			contactForUpdate.setLastName(contact.getLastName());
-			contactForUpdate.setBirthDate(contact.getBirthDate());
-			contactForUpdate.setVersion(contact.getVersion());
-		}
+		
+		contactForUpdate = contactService.findById(contact.getId());
+		contactForUpdate.setFirstName(contact.getFirstName());
+		contactForUpdate.setLastName(contact.getLastName());
+		contactForUpdate.setBirthDate(contact.getBirthDate());
+		contactForUpdate.setVersion(contact.getVersion());
+		
 		contactService.addOrUpdate(contactForUpdate);
 		return "redirect:/contacts/"
 				+ UrlUtil.encodeUrlPathSegment(contact.getId().toString(), httpServletRequest);
