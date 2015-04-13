@@ -22,51 +22,72 @@
 		<c:if test="${not empty message}">
 			<div id="message" class="${message.type}">${message.message}</div>
 		</c:if>
-		<table>
-			<tr>
-				<td>${labelContactFirstName}</td>
-				<td>${contact.firstName}</td>
-			</tr>
-			<tr>
-				<td>${labelContactLastName}</td>
-				<td>${contact.lastName}</td>
-			</tr>
-			<tr>
-				<td>${labelContactBirthDate}</td>
-				<td><joda:format value="${contact.birthDate}"
-						pattern="${dateFormatPattern}" /></td>
-			</tr>
-			<c:if test="${not empty contact.hobbies}">
+		<div>
+			<span id="contactData" class="activeTab tabs">Данные</span>| 
+			<span id="contactHobbies" class="tabs">Хобби</span>|
+			<span id="contactPlaces" class="tabs">Места</span>|
+			<span id="contactFriends" class="tabs">Друзья</span>
+		</div>
+		<div id="contactDataTab">
+			<table>
 				<tr>
-					<td rowspan="${contact.hobbies.size()+1}">Hobbies:</td>
+					<td width="30%">${labelContactFirstName}</td>
+					<td>${contact.firstName}</td>
 				</tr>
-				<c:forEach var="hobby" items="${contact.hobbies}">
-					<tr>
-						<td>${hobby.title}</td>
-					</tr>
-				</c:forEach>
-			</c:if>
-			<c:if test="${not empty contact.places}">
 				<tr>
-					<td rowspan="${contact.places.size()+1}">Places:</td>
+					<td width="30%">${labelContactLastName}</td>
+					<td>${contact.lastName}</td>
 				</tr>
-				<c:forEach var="place" items="${contact.places}">
-					<tr>
-						<td>${place.title}</td>
-					</tr>
-				</c:forEach>
-			</c:if>
-			<c:if test="${not empty contact.friends}">
 				<tr>
-					<td rowspan="${contact.friends.size()+1}">Friends:</td>
+					<td width="30%">${labelContactBirthDate}</td>
+					<td><joda:format value="${contact.birthDate}"
+							pattern="${dateFormatPattern}" /></td>
 				</tr>
-				<c:forEach var="friend" items="${contact.friends}">
+			</table>
+		</div>
+		<div id="contactHobbiesTab" class="hiddenTab">
+			<table>
+				<c:if test="${not empty contact.hobbies}">
 					<tr>
-						<td>${friend.firstName} ${friend.lastName}</td>
+						<td width="30%" rowspan="${contact.hobbies.size()+1}">Hobbies:</td>
 					</tr>
-				</c:forEach>
-			</c:if>
-		</table>
+					<c:forEach var="hobby" items="${contact.hobbies}">
+						<tr>
+							<td>${hobby.title}</td>
+						</tr>
+					</c:forEach>
+				</c:if>
+			</table>
+		</div>
+		<div id="contactPlacesTab" class="hiddenTab">
+			<table>
+				<c:if test="${not empty contact.places}">
+					<tr>
+						<td width="30%" rowspan="${contact.places.size()+1}">Places:</td>
+					</tr>
+					<c:forEach var="place" items="${contact.places}">
+						<tr>
+							<td>${place.title}</td>
+						</tr>
+					</c:forEach>
+				</c:if>
+			</table>
+		</div>
+		<div id="contactFriendsTab" class="hiddenTab">
+			<table>
+				<c:if test="${not empty contact.friends}">
+					<tr>
+						<td width="30%" rowspan="${contact.friends.size()+1}">Friends:</td>
+					</tr>
+					<c:forEach var="friend" items="${contact.friends}">
+						<tr>
+							<td>${friend.firstName}${friend.lastName}</td>
+						</tr>
+					</c:forEach>
+				</c:if>
+			</table>
+		</div>
 		<a href="${editContactUrl}/${contact.id}?form">Update contact</a>
 	</div>
+	
 </div>

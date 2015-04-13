@@ -120,4 +120,12 @@ public class Contact implements Serializable{
 	public String toString(){
 		return firstName + "\n" + lastName + "\n" + birthDate;
 	}
+	@Override
+	public boolean equals(Object obj) {
+		Contact contact1 = (Contact)obj;
+		if (id.equals(contact1.getId())) {
+			return true;
+		}
+		return false;
+	}
 }

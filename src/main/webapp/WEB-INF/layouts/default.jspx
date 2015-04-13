@@ -26,6 +26,16 @@
 		<spring:message code="application_name" var="app_name" htmlEscape="false" />
 		
 		<title><spring:message code="welcome_h3" arguments="${app_name}" /></title>
+
+		<!-- Add CSS-file and scripts for tabs and JSON working -->
+		<spring:url value="/resources" var="resources_root_url" />
+        <link rel="stylesheet" type="text/css" href="${resources_root_url}/styles/my-style.css" />
+        <script type="text/javascript" src="${resources_root_url}/scripts/jquery-1.7.1.js" >
+    		<!-- Empty -->
+        </script>
+        <script type="text/javascript" src="${resources_root_url}/scripts/tabs.js" >
+        	<!-- Empty -->
+        </script>
 	</head>
 	
 	<body class="tundra spring">

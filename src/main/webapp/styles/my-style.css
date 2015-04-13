@@ -1,0 +1,14 @@
+.hiddenTab {
+    display: none;
+}
+
+.activeTab {
+	background-color: #ddf;
+}
+
+span.tabs {
+	margin: 2% 2% 2% 2%;
+	font-size: 14px;
+	font-weight: bold;
+    cursor: pointer;
+}
