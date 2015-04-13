@@ -13,47 +13,72 @@
 	<spring:message code="label_contact_first_name" var="labelContactFirstName"/>
 	<spring:message code="label_contact_last_name" var="labelContactLastName"/>
 	<spring:message code="label_contact_birth_date" var="labelContactBirthDate"/>
+	<spring:message code="label_contact_data" var="labelContactData"/>
 	<spring:message code="label_contact_hobbies" var="labelContactHobbies"/>
 	<spring:message code="label_contact_places" var="labelContactPlaces"/>
 	<spring:message code="label_contact_friends" var="labelContactFriends"/>
+	<spring:message code="label_contact_details" var="labelContactDetails"/>
 	<spring:eval expression="contact.id == null ? labelContactNew:labelContactUpdate" var="formTitle" />
 
 	<h1>${formTitle}</h1>
 	<div id="contactUpdate">
-	<form:form modelAttribute="contact" id="contactUpdateForm" method="post">
-		<c:if test="${not empty message}">
-			<div id="message" class="message.type">${message.message}</div>
-		</c:if>
-		<form:label path="firstName">
-			${labelContactFirstName}
-		</form:label>
-		<form:input path="firstName" />
 		<div>
-			<form:errors path="firstName" cssClass="error" />
+			<span id="contactData" class="activeTab tabs">${labelContactData}</span>|
+			<span id="contactHobbies" class="tabs">${labelContactHobbies}</span>|
+			<span id="contactPlaces" class="tabs">${labelContactPlaces}</span>|
+			<span id="contactFriends" class="tabs">${labelContactFriends}</span>|
+			<span id="contactDetails" class="tabs">${labelContactDetails}</span>
 		</div>
-		<p/>
-		<form:label path="lastName">
-			${labelContactLastName}
-		</form:label>
-		<form:input path="lastName" />
-		<div>
-			<form:errors path="lastName" cssClass="error" />
+		<div id="contactDataTab">
+			<form:form modelAttribute="contact" id="contactUpdateForm" method="post">
+				<p />
+				<c:if test="${not empty message}">
+					<div id="message" class="message.type">${message.message}</div>
+				</c:if>
+				<form:label path="firstName">
+					${labelContactFirstName}
+				</form:label>
+				<form:input path="firstName" />
+				<div>
+					<form:errors path="firstName" cssClass="error" />
+				</div>
+				<p />
+				<form:label path="lastName">
+					${labelContactLastName}
+				</form:label>
+				<form:input path="lastName" />
+				<div>
+					<form:errors path="lastName" cssClass="error" />
+				</div>
+				<p />
+				<form:label path="birthDate">
+					${labelContactBirthDate}
+				</form:label>
+				<form:input path="birthDate" id="birthDate" />
+				<div>
+					<form:errors path="birthDate" cssClass="error" />
+				</div>
+				<p />
+
+				<form:hidden path="version" />
+				<form:hidden path="id" />
+
+				<button type="submit" id="contactSubmit">Save</button>
+				<button type="reset">Reset</button>
+
+			</form:form>
 		</div>
-		<p/>
-		<form:label path="birthDate">
-			${labelContactBirthDate}
-		</form:label>
-		<form:input path="birthDate" id="birthDate" />
-		<div>
-			<form:errors path="birthDate" cssClass="error" />
+		<div id="contactHobbiesTab" class="hiddenTab">
+			<p />
 		</div>
-		<p/>
-		
-		<form:hidden path="version" />
-		
-		<button type="submit">Save</button>
-		<button type="reset">Reset</button>
-		
-	</form:form>
+		<div id="contactPlacesTab" class="hiddenTab">
+			<p />
+		</div>
+		<div id="contactFriendsTab" class="hiddenTab">
+			<p />
+		</div>
+		<div id="contactDetailsTab" class="hiddenTab">
+			<p />
+		</div>
 	</div>
 </div>

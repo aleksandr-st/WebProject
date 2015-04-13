@@ -7,26 +7,30 @@
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />
 	<jsp:output omit-xml-declaration="yes" />
 
-	<spring:message code="label_contact_list" var="labelContactList"/>
+	<spring:message code="label_contact_info" var="labelContactInfo"/>
 	<spring:message code="label_contact_first_name" var="labelContactFirstName"/>
 	<spring:message code="label_contact_last_name" var="labelContactLastName"/>
 	<spring:message code="label_contact_birth_date" var="labelContactBirthDate"/>
 	<spring:message code="date_format_pattern" var="dateFormatPattern"/>
+	<spring:message code="label_contact_data" var="labelContactData"/>
 	<spring:message code="label_contact_hobbies" var="labelContactHobbies"/>
 	<spring:message code="label_contact_places" var="labelContactPlaces"/>
 	<spring:message code="label_contact_friends" var="labelContactFriends"/>
+	<spring:message code="label_contact_details" var="labelContactDetails"/>
+	<spring:message code="label_contact_update" var="labelContactUpdate"/>
 	<spring:url value="/contacts" var="editContactUrl" />
 
-	<h1>${labelContactList}</h1>
+	<h1>${labelContactInfo}</h1>
 	<div id="contactInfo">
 		<c:if test="${not empty message}">
 			<div id="message" class="${message.type}">${message.message}</div>
 		</c:if>
 		<div>
-			<span id="contactData" class="activeTab tabs">Данные</span>| 
-			<span id="contactHobbies" class="tabs">Хобби</span>|
-			<span id="contactPlaces" class="tabs">Места</span>|
-			<span id="contactFriends" class="tabs">Друзья</span>
+			<span id="contactData" class="activeTab tabs">${labelContactData}</span>| 
+			<span id="contactHobbies" class="tabs">${labelContactHobbies}</span>|
+			<span id="contactPlaces" class="tabs">${labelContactPlaces}</span>|
+			<span id="contactFriends" class="tabs">${labelContactFriends}</span>|
+			<span id="contactDetails" class="tabs">${labelContactDetails}</span>
 		</div>
 		<div id="contactDataTab">
 			<table>
@@ -49,7 +53,7 @@
 			<table>
 				<c:if test="${not empty contact.hobbies}">
 					<tr>
-						<td width="30%" rowspan="${contact.hobbies.size()+1}">Hobbies:</td>
+						<td width="30%" rowspan="${contact.hobbies.size()+1}">${labelContactHobbies}:</td>
 					</tr>
 					<c:forEach var="hobby" items="${contact.hobbies}">
 						<tr>
@@ -63,7 +67,7 @@
 			<table>
 				<c:if test="${not empty contact.places}">
 					<tr>
-						<td width="30%" rowspan="${contact.places.size()+1}">Places:</td>
+						<td width="30%" rowspan="${contact.places.size()+1}">${labelContactPlaces}:</td>
 					</tr>
 					<c:forEach var="place" items="${contact.places}">
 						<tr>
@@ -77,17 +81,31 @@
 			<table>
 				<c:if test="${not empty contact.friends}">
 					<tr>
-						<td width="30%" rowspan="${contact.friends.size()+1}">Friends:</td>
+						<td width="30%" rowspan="${contact.friends.size()+1}">${labelContactFriends}:</td>
 					</tr>
 					<c:forEach var="friend" items="${contact.friends}">
 						<tr>
-							<td>${friend.firstName}${friend.lastName}</td>
+							<td>${friend.firstName} ${friend.lastName}</td>
 						</tr>
 					</c:forEach>
 				</c:if>
 			</table>
 		</div>
-		<a href="${editContactUrl}/${contact.id}?form">Update contact</a>
+		<div id="contactDetailsTab" class="hiddenTab">
+			<table>
+				<c:if test="${not empty contact.contactDetails}">
+					<tr>
+						<td width="30%" rowspan="${contact.contactDetails.size()+1}">${labelContactDetails}:</td>
+					</tr>
+					<c:forEach var="contactDetails" items="${contact.contactDetails}">
+						<tr>
+							<td>${contactDetails.type}: ${contactDetails.data}</td>
+						</tr>
+					</c:forEach>
+				</c:if>
+			</table>
+		</div>
+		<a href="${editContactUrl}/${contact.id}?form">${labelContactUpdate}</a>
 	</div>
 	
 </div>

@@ -6,9 +6,10 @@
 	<jsp:output omit-xml-declaration="yes" />
 	
 	<spring:message code="header_text" var="headerText" />
+	<spring:url value="/contacts" var="contactListUrl" />
 	
 	<div id="appname">
-		<h1>${headerText}</h1>
+		<a href="${contactListUrl}"><h1>${headerText}</h1></a>
 	</div>
 
 </div>
