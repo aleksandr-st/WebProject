@@ -75,12 +75,40 @@ $(document).ready(function(){
     	var lastName = $('#lastName').val();
     	var birthDate = $('#birthDate').val();
     	var version = $('#version').val();
+    	var id = $('#id').val();
+    	var jsonUrl = "/contacts/";
+		if (((id === "") || (id == undefined))) {
+			jsonUrl += "?jsonCreate";
+		} else {
+			jsonUrl += "" + id +"?jsonUpdate"
+		};
+    	var hadErrors = false;
     	if ((firstName === "") || (firstName == undefined)) {
     		alert("First name is required!");
+    		hadErrors = true;
     	};
     	if ((lastName === "") || (lastName == undefined)) {
     		alert("Last name is required!");
+    		hadErrors = true;
     	};
+    	if (hadErrors){
+    		return false;
+    	}
+    	
+    	$.ajax({
+    		url: jsonUrl,
+    		data: JSON.stringify(json),
+    		type: "POST",
+    		
+    		beforeSend: function(xhr){
+    			xhr.setRequestHeader("Accept","application/json");
+    			xhr.setRequestHeader("Content-Type","application/json");
+    		},
+    		success: function(contactJson){
+    			alert("Id "+contactJson.id+" name: "+contactJson.firstName);
+    		}
+    	});
+    	
     	event.preventDefault();
     });
 
