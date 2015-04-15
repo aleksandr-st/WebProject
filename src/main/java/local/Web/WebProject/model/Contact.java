@@ -6,9 +6,13 @@ import java.io.Serializable;
 import java.util.*;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import local.Web.WebProject.util.DateTimeAdapter;
 
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name="contact")
@@ -30,6 +34,7 @@ public class Contact implements Serializable{
 	private String firstName;
 	@Column(name="LAST_NAME")
 	private String lastName;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Type(type="org.joda.time.contrib.hibernate.PersistentDateTime")
 	@Column(name="BIRTH_DATE")
 	private DateTime birthDate;

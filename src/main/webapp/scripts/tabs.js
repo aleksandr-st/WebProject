@@ -76,11 +76,11 @@ $(document).ready(function(){
     	var birthDate = $('#birthDate').val();
     	var version = $('#version').val();
     	var id = $('#id').val();
-    	var jsonUrl = "/contacts/";
+    	var jsonUrl = $("#contactUpdateForm").attr("action");
 		if (((id === "") || (id == undefined))) {
 			jsonUrl += "?jsonCreate";
 		} else {
-			jsonUrl += "" + id +"?jsonUpdate"
+			jsonUrl += "/" + id +"?jsonUpdate"
 		};
     	var hadErrors = false;
     	if ((firstName === "") || (firstName == undefined)) {
@@ -94,7 +94,10 @@ $(document).ready(function(){
     	if (hadErrors){
     		return false;
     	}
-    	
+    	var json = {id:id,version:version,firstName:firstName,lastName:lastName,
+    			birthDate:birthDate};
+    	//alert("json prepearing complete. Url: "+jsonUrl);
+    	//alert(""+JSON.stringify(json));
     	$.ajax({
     		url: jsonUrl,
     		data: JSON.stringify(json),
@@ -105,7 +108,16 @@ $(document).ready(function(){
     			xhr.setRequestHeader("Content-Type","application/json");
     		},
     		success: function(contactJson){
+    	    	$('#firstName').val(contactJson.firstName);
+    	    	$('#lastName').val(contactJson.lastName);
+    	    	$('#birthDate').val(contactJson.birthDate);
+    	    	$('#version').val(contactJson.version);
+    	    	$('#id').val(contactJson.id);
+
+    	    	$('#operationResultMessage').html('Contact saved successful!');
     			alert("Id "+contactJson.id+" name: "+contactJson.firstName);
+    	    	
+    	    	$('#viewContact').attr('href',$('#contactUpdateForm').attr('action')+'/'+contactJson.id);
     		}
     	});
     	

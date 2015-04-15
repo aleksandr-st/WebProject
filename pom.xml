@@ -135,6 +135,21 @@
 		<artifactId>tiles-jsp</artifactId>
 		<version>${tiles.version}</version>
 	</dependency>
+	<dependency>
+		<groupId>com.fasterxml.jackson.core</groupId>
+		<artifactId>jackson-core</artifactId>
+		<version>${jackson.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>com.fasterxml.jackson.core</groupId>
+		<artifactId>jackson-databind</artifactId>
+		<version>${jackson.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>com.fasterxml.jackson.datatype</groupId>
+		<artifactId>jackson-datatype-joda</artifactId>
+		<version>${jackson.version}</version>
+	</dependency>
   </dependencies>
   <build>
     <finalName>WebProject</finalName>
@@ -152,5 +167,6 @@
 	<jstl.version>1.2</jstl.version>
 	<jsp-api.version>2.1</jsp-api.version>
 	<servlet-api.version>2.5</servlet-api.version>
+	<jackson.version>2.5.0</jackson.version>
   </properties>
 </project>

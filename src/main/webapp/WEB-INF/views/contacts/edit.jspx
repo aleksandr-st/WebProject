@@ -18,7 +18,10 @@
 	<spring:message code="label_contact_places" var="labelContactPlaces"/>
 	<spring:message code="label_contact_friends" var="labelContactFriends"/>
 	<spring:message code="label_contact_details" var="labelContactDetails"/>
+	<spring:message code="label_contact_view" var="labelContactView"/>
+	<spring:url value="/contacts" var="viewContactUrl" />
 	<spring:eval expression="contact.id == null ? labelContactNew:labelContactUpdate" var="formTitle" />
+	<spring:eval expression="contact.id == null ? '':'/'+contact.id" var="contactId" />
 
 	<h1>${formTitle}</h1>
 	<div id="contactUpdate">
@@ -30,11 +33,15 @@
 			<span id="contactDetails" class="tabs">${labelContactDetails}</span>
 		</div>
 		<div id="contactDataTab">
-			<form:form modelAttribute="contact" id="contactUpdateForm" method="post">
+			<form:form modelAttribute="contact" id="contactUpdateForm" method="post"
+					action="${pageContext.request.contextPath}/contacts">
 				<p />
 				<c:if test="${not empty message}">
 					<div id="message" class="message.type">${message.message}</div>
 				</c:if>
+				<div id="operationResultMessage">
+					<p />
+				</div>
 				<form:label path="firstName">
 					${labelContactFirstName}
 				</form:label>
@@ -70,6 +77,7 @@
 		</div>
 		<div id="contactHobbiesTab" class="hiddenTab">
 			<p />
+			
 		</div>
 		<div id="contactPlacesTab" class="hiddenTab">
 			<p />
@@ -80,5 +88,6 @@
 		<div id="contactDetailsTab" class="hiddenTab">
 			<p />
 		</div>
+		<a id="viewContact" href="${viewContactUrl}${contactId}">${labelContactView}</a>
 	</div>
 </div>

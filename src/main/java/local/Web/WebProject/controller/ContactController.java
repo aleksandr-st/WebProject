@@ -5,12 +5,15 @@ import java.util.Locale;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import local.Web.WebProject.form.MessageMS;
 import local.Web.WebProject.model.Contact;
 import local.Web.WebProject.service.ContactService;
 import local.Web.WebProject.util.UrlUtil;
+import local.Web.WebProject.util.DateTimeAdapter;
 
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +22,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -117,10 +121,27 @@ public class ContactController {
 		return "contacts/create";		
 	}
 
-	@RequestMapping(params = "jsonCreate", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, 
+	@RequestMapping(params = "jsonCreate", method = RequestMethod.POST)
+	@ResponseBody
+	public Contact createJson(@RequestBody Contact contact){
+		System.out.println("456");
+		System.out.println("id: "+contact.getId()+" name: "+contact.getFirstName());
+		return contactService.addOrUpdate(contact);
+	}
+
+	@RequestMapping(value="/{id}", params = "jsonUpdate", method = RequestMethod.POST,
+			produces = MediaType.APPLICATION_JSON_VALUE, 
 			consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public String createJson(Contact contact, BindingResult bindingResult, Model uiModel){
-		
+	public Contact updateJson(@RequestBody Contact contact, @PathVariable("id") Long id){
+		System.out.println("123");
+		System.out.println("id: "+contact.getId()+" name: "+contact.getFirstName());
+		return contactService.addOrUpdate(contact);
 	}
+	
+	@ExceptionHandler
+	public void exceptionHandler(Exception ex){
+		ex.printStackTrace();
+	}
+	
 }
