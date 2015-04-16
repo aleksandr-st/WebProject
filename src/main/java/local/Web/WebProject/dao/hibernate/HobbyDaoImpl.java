@@ -48,6 +48,12 @@ public class HobbyDaoImpl implements HobbyDao{
 	@Transactional(readOnly=true)
 	public List<Hobby> findAllUnusedForContact(Contact contact) {
 		List<Hobby> allHobbies = findAll();
+		if (contact == null){
+			return allHobbies;
+		}
+		if (contact.getHobbies() == null){
+			return allHobbies;
+		}
 		for (Hobby hobby: contact.getHobbies()){
 			allHobbies.remove(hobby);
 		};

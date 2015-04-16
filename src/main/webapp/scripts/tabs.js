@@ -2,7 +2,10 @@ $(document).ready(function(){
 	function checkId(){
 		var id = $('#id').val();
 		if (((id === "") || (id == undefined))) {
-			return false
+			id = $('#id').text();
+			if (((id === "") || (id == undefined))) {
+				return false
+			};
 		};
 		return true;
 	}
@@ -149,6 +152,47 @@ $(document).ready(function(){
         var selectedItems = $(selectFrom + " :selected").toArray();
         $(moveTo).append(selectedItems);
         selectedItems.remove;
+    });
+    
+    $('#contactHobbiesSave').click(function(event){
+    	var version = $('#version').val();
+    	var id = $('#id').val();
+    	var jsonUrl = $("#contactUpdateForm").attr("action")+"/" + id +"?jsonHobbyUpdate&version="+version;
+    	var hobbies = $('#usedHobbies').toArray();
+    	var json = '{[';
+    	var list = $("#selectList");
+    	$.each(items, function(index, item) {
+    	  list.append(new Option(item.text, item.value));
+    	});    	alert(""+hobbies);
+    	
+    	var json = {id:id,version:version,firstName:firstName,lastName:lastName,
+    			birthDate:birthDate,hobbies:hobbies};
+    	$.ajax({
+    		url: jsonUrl,
+    		data: JSON.stringify(json),
+    		type: "POST",
+    		
+    		beforeSend: function(xhr){
+    			xhr.setRequestHeader("Accept","application/json");
+    			xhr.setRequestHeader("Content-Type","application/json");
+    		},
+    		success: function(contactJson){
+    	    	$('#firstName').val(contactJson.firstName);
+    	    	$('#lastName').val(contactJson.lastName);
+    	    	$('#birthDate').val(contactJson.birthDate);
+    	    	$('#version').val(contactJson.version);
+    	    	$('#id').val(contactJson.id);
+    	    	var hobbiesReseived = contactJson.hobbies;
+    	    	alert(""+hobbiesReseived);
+    	    	//$('#usedHobbies').removeOption(/./);
+    	    	
+
+    	    	$('#operationResultMessage').html('Contact saved successful!');
+    			alert("Id "+contactJson.id+" name: "+contactJson.firstName);
+    	    	
+    	    	$('#viewContact').attr('href',$('#contactUpdateForm').attr('action')+'/'+contactJson.id);
+    		}
+    	});
     });
 
 });

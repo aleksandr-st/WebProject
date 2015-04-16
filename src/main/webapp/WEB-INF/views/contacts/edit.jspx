@@ -100,6 +100,7 @@
 					</td>
 				</tr>
 			</table>
+			<input type="button" id="contactHobbiesSave" value="Save" />
 		</div>
 		<div id="contactPlacesTab" class="hiddenTab">
 			<p />
