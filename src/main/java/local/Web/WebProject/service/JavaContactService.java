@@ -82,5 +82,9 @@ public class JavaContactService implements ContactService{
 		contactDao.addContact(contact);
 		return contact;
 	}
+	@Override
+	public List<Hobby> unusedHobbies(Contact contact) {
+		return hobbyDao.findAllUnusedForContact(contact);
+	}
 
 }

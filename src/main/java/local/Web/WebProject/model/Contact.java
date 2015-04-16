@@ -6,10 +6,6 @@ import java.io.Serializable;
 import java.util.*;
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-
-import local.Web.WebProject.util.DateTimeAdapter;
-
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;

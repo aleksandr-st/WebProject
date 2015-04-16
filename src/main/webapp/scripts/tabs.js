@@ -1,5 +1,12 @@
 $(document).ready(function(){
- 
+	function checkId(){
+		var id = $('#id').val();
+		if (((id === "") || (id == undefined))) {
+			return false
+		};
+		return true;
+	}
+	
     $("#contactData").click(function(){
         $("#contactDataTab").removeClass("hiddenTab");
         $("#contactHobbiesTab").addClass("hiddenTab");
@@ -15,6 +22,9 @@ $(document).ready(function(){
     });
 
     $("#contactHobbies").click(function(){
+    	if (checkId() == false){
+    		return false;
+    	}
         $("#contactDataTab").addClass("hiddenTab");
         $("#contactHobbiesTab").removeClass("hiddenTab");
         $("#contactPlacesTab").addClass("hiddenTab");
@@ -29,6 +39,9 @@ $(document).ready(function(){
     });
 
     $("#contactPlaces").click(function(){
+    	if (checkId() == false){
+    		return false;
+    	}
         $("#contactDataTab").addClass("hiddenTab");
         $("#contactHobbiesTab").addClass("hiddenTab");
         $("#contactPlacesTab").removeClass("hiddenTab");
@@ -43,6 +56,9 @@ $(document).ready(function(){
     });
 
     $("#contactFriends").click(function(){
+    	if (checkId() == false){
+    		return false;
+    	}
         $("#contactDataTab").addClass("hiddenTab");
         $("#contactHobbiesTab").addClass("hiddenTab");
         $("#contactPlacesTab").addClass("hiddenTab");
@@ -57,6 +73,9 @@ $(document).ready(function(){
     });
 
     $("#contactDetails").click(function(){
+    	if (checkId() == false){
+    		return false;
+    	}
         $("#contactDataTab").addClass("hiddenTab");
         $("#contactHobbiesTab").addClass("hiddenTab");
         $("#contactPlacesTab").addClass("hiddenTab");
@@ -96,8 +115,6 @@ $(document).ready(function(){
     	}
     	var json = {id:id,version:version,firstName:firstName,lastName:lastName,
     			birthDate:birthDate};
-    	//alert("json prepearing complete. Url: "+jsonUrl);
-    	//alert(""+JSON.stringify(json));
     	$.ajax({
     		url: jsonUrl,
     		data: JSON.stringify(json),
@@ -122,6 +139,16 @@ $(document).ready(function(){
     	});
     	
     	event.preventDefault();
+    });
+
+    $("#MoveRight,#MoveLeft").click(function(event){
+        var id = $(event.target).attr("id");
+        var selectFrom = id == "MoveRight" ? "#usedHobbies" : "#unusedHobbies";
+        var moveTo = id == "MoveRight" ? "#unusedHobbies" : "#usedHobbies";
+
+        var selectedItems = $(selectFrom + " :selected").toArray();
+        $(moveTo).append(selectedItems);
+        selectedItems.remove;
     });
 
 });

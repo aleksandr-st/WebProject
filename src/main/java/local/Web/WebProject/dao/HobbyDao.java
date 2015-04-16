@@ -15,4 +15,6 @@ public interface HobbyDao {
 	public Hobby findById(String id);
 	
 	public List<Hobby> findAll();
+
+	public List<Hobby> findAllUnusedForContact(Contact contact);
 }

@@ -77,7 +77,29 @@
 		</div>
 		<div id="contactHobbiesTab" class="hiddenTab">
 			<p />
-			
+			<table>
+				<tr>
+					<td width="45%">
+						<select style="width:100%;" size="10" id="usedHobbies" multiple="multiple">
+							<c:forEach var="hobby" items="${contact.hobbies}">
+								<option value="${hobby.title}">${hobby.title}</option>
+							</c:forEach>
+						</select>
+					</td>
+					<td width="10%">
+			            <input id="MoveRight" type="button" value=" >> " />
+            			<br />
+						<input id="MoveLeft" type="button" value=" &#60;&#60; " />
+					</td>
+					<td width="45%">
+						<select style="width:100%;" size="10" id="unusedHobbies" multiple="multiple">
+							<c:forEach var="hobby" items="${unusedHobbies}">
+								<option value="${hobby.title}">${hobby.title}</option>
+							</c:forEach>
+						</select>
+					</td>
+				</tr>
+			</table>
 		</div>
 		<div id="contactPlacesTab" class="hiddenTab">
 			<p />

@@ -16,6 +16,8 @@ public interface ContactService {
 	
 	Hobby addHobby(String title, String description);
 	
+	List<Hobby> unusedHobbies(Contact contact);
+	
 	Place addPlace(String title, String description, Double longitude, Double latitude);
 	
 	void addFriendship(Contact contact, Contact contactFriend);

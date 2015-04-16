@@ -3,6 +3,7 @@ package local.Web.WebProject.dao.hibernate;
 import java.util.*;
 
 import javax.annotation.Resource;
+
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,13 +38,20 @@ public class HobbyDaoImpl implements HobbyDao{
 	}
 	@Transactional(readOnly=true)
 	public Hobby findById(String id){
-//		System.out.println("1");
 		return (Hobby)sessionFactory.getCurrentSession().getNamedQuery("Hobby.findById").setParameter("id", id).uniqueResult();
 	}
 	@Transactional(readOnly=true)
 	public List<Hobby> findAll(){
-//		System.out.println("2");
 		return sessionFactory.getCurrentSession().createQuery("from Hobby h").list();
+	}
+	@Override
+	@Transactional(readOnly=true)
+	public List<Hobby> findAllUnusedForContact(Contact contact) {
+		List<Hobby> allHobbies = findAll();
+		for (Hobby hobby: contact.getHobbies()){
+			allHobbies.remove(hobby);
+		};
+		return allHobbies;
 	}
 
 }

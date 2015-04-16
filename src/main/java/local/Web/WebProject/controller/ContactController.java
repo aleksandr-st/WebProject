@@ -5,15 +5,14 @@ import java.util.Locale;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import local.Web.WebProject.dao.HobbyDao;
 import local.Web.WebProject.form.MessageMS;
 import local.Web.WebProject.model.Contact;
+import local.Web.WebProject.model.Hobby;
 import local.Web.WebProject.service.ContactService;
 import local.Web.WebProject.util.UrlUtil;
-import local.Web.WebProject.util.DateTimeAdapter;
 
-import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,7 +90,9 @@ public class ContactController {
 
 	@RequestMapping(value="/{id}", params = "form", method = RequestMethod.GET)
 	public String updateForm(@PathVariable("id") Long id, Model uiModel) {
-		uiModel.addAttribute("contact", contactService.findById(id));
+		Contact contact = contactService.findById(id);
+		uiModel.addAttribute("contact", contact);
+		uiModel.addAttribute("unusedHobbies", contactService.unusedHobbies(contact));
 		return "contacts/update";		
 	}
 
@@ -118,14 +119,15 @@ public class ContactController {
 	public String createForm(Model uiModel) {
 		Contact contact = new Contact();
 		uiModel.addAttribute("contact", contact);
+		uiModel.addAttribute("unusedHobbies", contactService.unusedHobbies(contact));
 		return "contacts/create";		
 	}
 
-	@RequestMapping(params = "jsonCreate", method = RequestMethod.POST)
+	@RequestMapping(params = "jsonCreate", method = RequestMethod.POST,
+			produces = MediaType.APPLICATION_JSON_VALUE, 
+			consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public Contact createJson(@RequestBody Contact contact){
-		System.out.println("456");
-		System.out.println("id: "+contact.getId()+" name: "+contact.getFirstName());
 		return contactService.addOrUpdate(contact);
 	}
 
@@ -133,10 +135,17 @@ public class ContactController {
 			produces = MediaType.APPLICATION_JSON_VALUE, 
 			consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public Contact updateJson(@RequestBody Contact contact, @PathVariable("id") Long id){
-		System.out.println("123");
-		System.out.println("id: "+contact.getId()+" name: "+contact.getFirstName());
-		return contactService.addOrUpdate(contact);
+	public Contact updateJson(@RequestBody Contact contact, @PathVariable("id") Long id, 
+			RedirectAttributes redirectAttributes){
+		Contact contactForUpdate = contactService.findById(contact.getId());
+		if ((contactForUpdate != null) && (contactForUpdate.getVersion()==contact.getVersion())){
+			contactForUpdate.setFirstName(contact.getFirstName());
+			contactForUpdate.setLastName(contact.getLastName());
+			contactForUpdate.setBirthDate(contact.getBirthDate());
+			return contactService.addOrUpdate(contactForUpdate);
+		} else {
+			return contact;
+		}
 	}
 	
 	@ExceptionHandler

@@ -48,6 +48,9 @@
 							pattern="${dateFormatPattern}" /></td>
 				</tr>
 			</table>
+			<div id="id" style="display: none;" value="${contact.id}">
+				${contact.id}
+			</div>
 		</div>
 		<div id="contactHobbiesTab" class="hiddenTab">
 			<table>
